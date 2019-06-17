@@ -16,7 +16,7 @@ $result = array();
 
 if ($action == null){
     $myarray[] = array(
-        "response" => "0"
+        "pesan" => "0"
     );
     
     $result = array("result"=>$myarray);
@@ -35,27 +35,18 @@ if ($action == null){
     $result = array("hasil"=>$myarray);
     print json_encode($result);
 }elseif($action == "2"){
-    if ($_REQUEST['password'] == ""){
-        $sql = "update pengguna set phone = '". $_REQUEST['phone']."', "
-            . "email = '". $_REQUEST['email']."', "
-            . "active = '". $_REQUEST['active']."', "
-            . "type = '". $_REQUEST['type']."' "
-            . "where username = '". $_REQUEST['username']."'";
-    }else{
-        $sql = "update pengguna set password = '". md5($_REQUEST['password'])."', "
-            . "phone = '". $_REQUEST['phone']."', "
-            . "email = '". $_REQUEST['email']."', "
-            . "active = '". $_REQUEST['active']."', "
-            . "type = '". $_REQUEST['type']."' "
-            . "where username = '". $_REQUEST['username']."'";
-    }
+    $sql = "update barang set nama = '". $_REQUEST['nm']."', "
+        . "jenis = '". $_REQUEST['jn']."', "
+        . "stok = '". $_REQUEST['st']."' "
+        . "where id = '". $_REQUEST['id']."'";
+
     $d->execute($sql);
     
     $myarray[] = array(
-        "response" => $_REQUEST['username']." updated"
+        "pesan" => $_REQUEST['nm']." telah diubah"
     );
     
-    $result = array("result"=>$myarray);
+    $result = array("hasil"=>$myarray);
     print json_encode($result);
 }elseif($action == "3"){
     $sql = "delete from barang where id = ". $_REQUEST['id'];
